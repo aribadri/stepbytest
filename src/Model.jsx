@@ -1,5 +1,5 @@
-import React, {useEffect, useRef, useMemo} from "react";
-import { useBox, useCompoundBody } from "@react-three/cannon";
+import React from "react";
+import { useBox } from "@react-three/cannon";
 import * as THREE from "three";
 
 import { useFrame, useLoader } from "@react-three/fiber";

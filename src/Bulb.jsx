@@ -1,4 +1,4 @@
-import { useSphere, useBox } from "@react-three/cannon";
+import { useSphere } from "@react-three/cannon";
 const Bulb = (props) => {
   const [ref, api] = useSphere(()=>({mass:0,...props}))
 
