@@ -47,36 +47,49 @@ function App() {
         <ContextProvider.Provider value={{ enableOrbit, setEnableOrbit }}>
           <Orbit />
           <Physics>
-            <Dragable>
-          <Suspense fallback={null}>
-            <Model path="/box2.glb" 
-            position={[0,20,0]}
-            />
-              <Model path="/modelka/scene.gltf" 
-            position={[-5,20,5]}
-            />
-          </Suspense>
-              <Bulb position={[10, 15, 0]} />
+            <Bulb position={[10, 15, 0]} />
+            <Dragable
+            transformGroup
+            >
               <Suspense fallback={null}>
+                <Model path="/box2.glb" 
+            position={[-4,0,0]}
+            scale={10}
+            />
+              </Suspense>
+              
+              <Suspense fallback={null}>
+                <Model
+                  scale={10}
+                  castShadow
+                  path="/modelka/scene.gltf"
+                  position={[4, 0, 0]}
+                />
                 <Bulb position={[0, 15, 0]} />
                 <Box position={[0, 10, 6]} scale={1} />
+                <Box position={[0, 15, 5]} scale={1} />
               </Suspense>
               <Suspense fallback={null}>
-                <Box position={[0, 15, 5]} scale={1} />
               </Suspense>
             </Dragable>
             {/* <Floor position={[0, -0.25, 0.5]} rotation={[0, 0.9, 0.8]} /> */}
-            <Floor position={[-5, -4, 0]} rotation={[0, -0.8, 0]} />
+            <Floor position={[0, 0, 0]} rotation={[0, -0.8, 0]} scale={1} />
           </Physics>
         </ContextProvider.Provider>
         <Suspense fallback={null}>
           <Background />
         </Suspense>
 
-        <ambientLight intensity={0.5} />
+        <ambientLight intensity={0.2} />
+        <directionalLight
+          intensity={0.5}
+          castShadow
+          receiveShadow
+          shadowBias={-0.0001}
+        />
 
         {/* <orbitControls/> */}
-        {/* <axesHelper args={[10]}/> */}
+        <axesHelper args={[10]}/>
       </Canvas>
     </div>
   );

@@ -1,24 +1,31 @@
-import React from "react";
-import { useBox } from "@react-three/cannon";
+import React, {useEffect, useRef, useMemo} from "react";
+import { useBox, useCompoundBody } from "@react-three/cannon";
 import * as THREE from "three";
 
 import { useFrame, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 const Model = (props) => {
-  const [ref, api] = useBox(() => ({ mass: 4.5, ...props }));
+  const [ref, api] = useBox(() => ({ mass: 0, ...props }))
 
   const model = useLoader(GLTFLoader, props.path);
-  console.log(model);
+  
+
   let mixer;
+  model.scene.traverse((child) => {
+      if (child.isMesh) {
+          child.castShadow = true
+      }
+  })
   const handleClick = () => {
-    if (model.animations.length) {
-      mixer = new THREE.AnimationMixer(model.scene);
-      model.animations.forEach((clip) => {
-        const action = mixer.clipAction(clip);
-        action.play();
-      });
-    }
+
+        if (model.animations.length) {
+            mixer = new THREE.AnimationMixer(model.scene);
+            model.animations.forEach((clip) => {
+                const action = mixer.clipAction(clip);
+                action.play();
+            });
+        }
   };
   useFrame((state, delta) => {
     mixer?.update(delta);
@@ -26,9 +33,11 @@ const Model = (props) => {
 
   return (
     <primitive
+    castShadow
+    receiveShadow
+    {...props}
       object={model.scene}
       onClick={handleClick}
-      scale={10}
       ref={ref}
       api={api}
     />

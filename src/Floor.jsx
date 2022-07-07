@@ -9,7 +9,7 @@ const Floor = (props) => {
     <mesh {...props} receiveShadow
     rotation={props.rotation}
     r>
-      <boxBufferGeometry args={[20, 0.5, 20]} />
+      <boxBufferGeometry args={[50, 0.5, 50]} />
       <meshPhysicalMaterial color="white" 
     //   map={texture} 
       />

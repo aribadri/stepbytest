@@ -1,4 +1,4 @@
-import { useLoader, useFrame } from "@react-three/fiber";
+import { useLoader } from "@react-three/fiber";
 import * as THREE from "three";
 import { useBox } from "@react-three/cannon";
 
@@ -28,7 +28,7 @@ const Box = (props) => {
       onPointerDown={handlePointerDown}
     //   onPointerLeave={handlePointerLeave}
     //   onPointerEnter={handlePointerEnter}
-      // receiveShadow
+      receiveShadow
     >
       <boxBufferGeometry />
       <meshPhysicalMaterial

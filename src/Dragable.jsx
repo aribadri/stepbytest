@@ -12,6 +12,7 @@ const Dragable = (props) => {
 
   useEffect(() => {
     setChildren(groupRef.current.children);
+    console.log(groupRef.current.children);
     setEnableOrbit(true);
   }, [setEnableOrbit, setChildren]);
 
@@ -26,17 +27,17 @@ const Dragable = (props) => {
       setEnableOrbit(true)
     );
     controlsRef.current.addEventListener("dragstart", (e) =>
-    e.object.api.mass.set(0)
+    e.object.api?.mass.set(0)
   );
   controlsRef.current.addEventListener("dragend", (e) =>
-  e.object.api.mass.set(1)
+  e.object.api?.mass.set(1)
 
 );
     controlsRef.current.addEventListener("drag", (e) =>{
         console.log(e.object);
 
-        e.object.api.position.copy(e.object.position)
-        e.object.api.velocity.set(0, 0, 0)
+        e.object.api?.position.copy(e.object.position)
+        e.object.api?.velocity.set(0, 0, 0)
     }
 
   );
@@ -46,6 +47,7 @@ const Dragable = (props) => {
   return (
     <group ref={groupRef}>
       <dragControls
+      transformGroup={props.transformGroup}
         ref={controlsRef}
         args={[children, camera, gl.domElement]}
       />

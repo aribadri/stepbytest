@@ -1,6 +1,6 @@
 import { useSphere, useBox } from "@react-three/cannon";
 const Bulb = (props) => {
-  const [ref, api] = useSphere(()=>({mass:3,...props}))
+  const [ref, api] = useSphere(()=>({mass:0,...props}))
 
   return (
     <mesh {...props}
